@@ -1,0 +1,41 @@
+name: live
+
+on:
+  schedule:
+    - cron: "*/30 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: data
+  cancel-in-progress: false
+
+jobs:
+  live:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: node scripts/live.js
+      - name: commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git diff --quiet data/live.json && exit 0
+          cp data/live.json /tmp/live.json
+          for i in 1 2 3; do
+            git fetch origin main
+            git reset --hard origin/main
+            cp /tmp/live.json data/live.json
+            git add data/live.json
+            git diff --staged --quiet && exit 0
+            git commit --amend --no-edit --allow-empty-message
+            git push --force-with-lease origin main && exit 0
+            sleep 5
+          done
+          exit 1
