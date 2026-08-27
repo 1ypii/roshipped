@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>roshipped</title>
+<meta name="description" content="which roblox front page games shipped an update, tracked around the clock">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Prompt:wght@400;500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<meta property="og:title" content="roshipped">
+<meta property="og:description" content="which roblox front page games shipped an update, tracked around the clock">
+</head>
+<body>
+
+<nav class="topbar">
+  <div class="wrap topbar-inner">
+    <a class="brand" href="/">roshipped</a>
+    <div class="topbar-links" id="views">
+      <a href="#grid" data-view="grid" class="is-on">games</a>
+      <a href="#grid" data-view="feed">feed</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <h1><span id="stat-shipped">0</span> front page games pushed an update today</h1>
+    <p class="readout">
+      <span class="readout-item"><span id="stat-tracked">0</span> tracked</span>
+      <span class="readout-item"><span id="stat-week">0</span> shipped this week</span>
+      <span class="readout-item"><span id="stat-cold">0</span> have not touched their game in a month</span>
+    </p>
+  </div>
+</header>
+
+<section class="wrap bar" id="grid">
+  <div class="tabs" id="tabs">
+    <button class="tab is-on" data-from="0" data-to="">all<span class="tab-n"></span></button>
+    <button class="tab" data-from="0" data-to="1">today<span class="tab-n"></span></button>
+    <button class="tab" data-from="1" data-to="7">this week<span class="tab-n"></span></button>
+    <button class="tab" data-from="7" data-to="30">this month<span class="tab-n"></span></button>
+    <button class="tab" data-from="30" data-to="">older<span class="tab-n"></span></button>
+  </div>
+  <input type="search" id="search" placeholder="search" autocomplete="off">
+  <select id="sort" aria-label="sort">
+    <option value="newest">newest ship</option>
+    <option value="playing">most playing</option>
+    <option value="visits">most visits</option>
+    <option value="gap">longest gap</option>
+  </select>
+</section>
+
+<main class="wrap">
+  <div class="cards" id="cards"></div>
+  <div class="feed" id="feed" hidden></div>
+  <div class="empty" id="empty" hidden>nothing here, try a wider window</div>
+  <button class="more" id="more" hidden>show more</button>
+  <p class="checked">last check <span id="stat-checked">–</span></p>
+</main>
+
+<div class="sheet" id="sheet" hidden>
+  <div class="sheet-back" id="sheet-back"></div>
+  <div class="sheet-panel" role="dialog" aria-modal="true" aria-label="game details">
+    <button class="sheet-close" id="sheet-close" aria-label="close">close</button>
+    <div id="sheet-body"></div>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <p class="fine">roshipped is a fan made project and is not affiliated with endorsed by or sponsored by roblox corporation</p>
+  </div>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>
